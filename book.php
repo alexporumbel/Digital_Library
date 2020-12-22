@@ -1,5 +1,5 @@
 <?php
-    require_once('sudo/assets/config/config.php');
+    require_once('sudo/assets/config/config.php'); 
     $book_id = $_GET['book_id'];
     $ret="SELECT * FROM  iL_Books WHERE b_id = ?"; 
     $stmt= $mysqli->prepare($ret) ;
