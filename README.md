@@ -1,7 +1,16 @@
 <p align="center"><img src="https://github.com/MartMbithi/Digital_Library/blob/master/images/logo-1.png" ></p>
 
 # Digital_Library
-Digital Library is a web based and also desktop based library management system.
+Digital Library is a web based library management system powered by Codeigniter 3.1.11 and is forked from https://github.com/MartMbithi/Digital_Library/
+
+Updates from original fork by MartMbithi:
+
+-Core update to Codeigniter 3.1.11
+-Integrated last version of PHPMailer for sending emails
+-Updated frontend and admin panels to bootstrap 4.5 AdminLTE3 template
+-Organized all assets in separate folder
+-Added file upload support for ebooks
+
 
 ## Login Credentials For Super User Account
 1. Email:   <b>admin@ilib.org</b><br>
@@ -14,6 +23,7 @@ Digital Library is a web based and also desktop based library management system.
 ## Login Credentials For Student Account
 1. Username:   <b>iLib-37508</b> or <b>student001@gmail.com</b><br>
 2. Password :  <b>demo</b> <br>
+
 
 
 ## Glance Of The System
@@ -29,7 +39,7 @@ Digital Library is a web based and also desktop based library management system.
 
 ## Theme
 
-The Digital Library Management System is crafted using [Altair-Admin-Template](https://github.com/Saworieza/Altair-Admin-Template).
+The Digital Library Management System is crafted using [AdminLTE3](https://github.com/ColorlibHQ/AdminLTE).
 
 ## License
 

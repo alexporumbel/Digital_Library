@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Adauga Disciplina</h1>
+            <h1>Adauga Categorie</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -20,22 +20,22 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Disciplina</h3>
+                <h3 class="card-title">Categorie</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form" method="POST" action="<?= @$id ? site_url("admin/managediscipline/$id") : site_url('admin/managediscipline');?>">
+              <form class="form" method="POST" action="<?= @$id ? site_url("admin/managecategory/$id") : site_url('admin/managecategory');?>">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="disciplina">Disciplina</label>
-                    <input type="text" class="form-control" id="disciplina" name='disciplina' value="<?= @$disciplinedata ? $disciplinedata['discipline'] : '';?>" placeholder="Disciplina">
+                    <label for="categorie">Categorie</label>
+                    <input type="text" class="form-control" id="categorie" name='categorie' value="<?= @$categorydata ? $categorydata['category'] : '';?>" placeholder="Categorie">
                   </div>
                   
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Adauga</button>
                 </div>
               </form>
             </div>

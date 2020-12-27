@@ -24,39 +24,40 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form">
+              <form class="form" method="POST" action="<?= @$id ? site_url("admin/managestudent/$id") : site_url('admin/managestudent');?>">
                 <div class="card-body">
+                    <center><font color="red"><b><?=$this->session->flashdata('err_login');?></b></font></center>
                   <div class="form-group">
                     <label for="nume">Nume</label>
-                    <input type="text" class="form-control" id="nume" name='nume' placeholder="Popescu">
+                    <input type="text" class="form-control" id="nume" name='nume' value="<?= @$studentdata ? $studentdata['name'] : '';?>" placeholder="Popescu">
                   </div>
                    <div class="form-group">
                     <label for="initiala">Intiala Tatalui</label>
-                    <input type="text" class="form-control" id="initiala" name='initiala' placeholder="C">
+                    <input type="text" class="form-control" id="initiala" name='initiala' value="<?= @$studentdata ? $studentdata['fathers_initial'] : '';?>" placeholder="C">
                   </div>
                     <div class="form-group">
                     <label for="prenume">Prenume</label>
-                    <input type="text" class="form-control" id="prenume" name='prenume' placeholder="Ionel">
+                    <input type="text" class="form-control" id="prenume" name='prenume' value="<?= @$studentdata ? $studentdata['lname'] : '';?>" placeholder="Ionel">
                   </div>
                   <div class="form-group">
                         <label for="facultate">Facultate</label>
                         <select name="facultate" class="custom-select facultate">
-                          <option value='x'>Facultate x</option>
-                          <option value='y'>Facultate y</option>
-                          <option value='z'>Facultate z</option>
+                          <option value='x' <?= @$studentdata['faculty']==='x' ? 'selected' : '';?>>Facultate x</option>
+                          <option value='y' <?= @$studentdata['faculty']==='y' ? 'selected' : '';?>>Facultate y</option>
+                          <option value='z' <?= @$studentdata['faculty']==='z' ? 'selected' : '';?>>Facultate z</option>
                         </select>
                       </div>
                     <div class="form-group">
                         <label for="an">An</label>
                         <select name="an" class="custom-select an">
-                          <option value='1'>Anul 1</option>
-                          <option value='2'>Anul 2</option>
-                          <option value='3'>Anul 3</option>
+                          <option value='1' <?= @$studentdata['year']==='1' ? 'selected' : '';?>>Anul 1</option>
+                          <option value='2' <?= @$studentdata['year']==='2' ? 'selected' : '';?>>Anul 2</option>
+                          <option value='3' <?= @$studentdata['year']==='3' ? 'selected' : '';?>>Anul 3</option>
                         </select>
                       </div>
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="popescu.ionel@yahoo.com">
+                    <input type="email" class="form-control" id="email" name="email" value="<?= @$studentdata ? $studentdata['email'] : '';?>" placeholder="popescu.ionel@yahoo.com">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Parola</label>
@@ -70,7 +71,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Salveaza</button>
                 </div>
               </form>
             </div>

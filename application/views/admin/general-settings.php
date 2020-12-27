@@ -24,7 +24,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form" method="POST" action="<?php echo base_url(); ?>admin/generalsettings">
+              <form class="form" method="POST" action="<?php echo site_url('admin/generalsettings');?>">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nume">Nume Site</label>

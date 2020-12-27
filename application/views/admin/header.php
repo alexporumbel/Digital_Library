@@ -12,7 +12,13 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'); ?>">
   <!-- Theme style -->
+  <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/select2/css/select2.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
+    <!-- Toastr -->
+  <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/toastr/toastr.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/dist/css/adminlte.min.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/datatables-bs4/css/responsive.bootstrap4.min.css'); ?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -92,13 +98,13 @@
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?= base_url('admin/adauga-publicatie'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Adauga Publicatie</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?= base_url('admin/management-publicatii'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lista Publicatii</p>
                 </a>
@@ -118,45 +124,48 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tag"></i>
               <p>
-                Subiecte si Discipline
+                Categorii
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?= base_url('admin/management-discipline'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management subiecte</p>
+                  <p>Management discipline</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?= base_url('admin/management-categorii'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management discipline</p>
+                  <p>Management categorii</p>
                 </a>
               </li>
             </ul>
           </li>
           
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview <?= $unconfirmedcount >0 ? 'menu-open': '';?>">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-graduate"></i>
               <p>
-                Utilizatori
+                Studenti
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?= base_url('admin/management-studenti'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Management utilizatori</p>
+                  <p>Management studenti</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?= base_url('admin/studenti-neconfirmati'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Utilizatori neconfirmati</p>
+                  <p>Studenti neconfirmati</p>
+                  <?php if($unconfirmedcount > 0) {
+                  echo "<span class='right badge badge-danger'>$unconfirmedcount</span>";
+                  } ?>
                 </a>
               </li>
             </ul>
@@ -207,7 +216,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?= base_url('admin/management-staff'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Conturi Staff</p>
                 </a>
