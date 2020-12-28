@@ -221,9 +221,12 @@ class Admin_model extends CI_Model
     }
     
     public function getpublications() {
-        $this->db->select('publications.id, categories.category as category, disciplines.discipline as discipline, publications.name, publications.subjects, publications.file, publications.download_rights');
+        $this->db->select("publications.id, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ', ') as subjects ");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
+        $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
+        $this->db->join('subjects', 'subject_links.subid=subjects.id', 'inner');
+        $this->db->group_by("publications.id");
         $qry = $this->db->get('publications');
         return $qry->result_array();
     }
@@ -235,24 +238,75 @@ class Admin_model extends CI_Model
             return $ress;
     }
     
+    public function getpubsubjects($id){
+        $this->db->select('subjects.subject, subjects.slug, subjects.id');
+        $this->db->join('subject_links', 'subjects.id=subject_links.subid', 'inner');
+        $this->db->where('subject_links.pubid', $id);
+        $qry = $this->db->get('subjects');
+        return $qry->result_array();
+    }
+    
+    protected function slugify($text) {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+        // trim
+        $text = trim($text, '-');
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+        // lowercase
+        $text = strtolower($text);
+        if (empty($text)) {
+            return 'n-a';
+        }
+        return $text;
+    }
+    
+    
+    private function addsubjects($subjects, $pubid){
+        foreach($subjects as $subject){
+            $this->db->where(array('slug'=>$this->slugify($subject)));
+        $result = $this->db->get('subjects');
+        $resultArray = $result->row_array();
+        if ($result->num_rows() < 1) {
+           $this->db->insert('subjects', array('subject' => $subject, 'slug'=>$this->slugify($subject)));
+           $lastid = $this->db->insert_id();
+           $this->db->reset_query();
+           $this->db->insert('subject_links', array('subid' => $lastid, 'pubid'=>$pubid));
+        }else{
+            $this->db->insert('subject_links', array('subid' => $resultArray['id'], 'pubid'=>$pubid));
+        }
+        $this->db->reset_query();
+        }
+    }
+    
+    private function removesubjects($subjects, $pubid){
+        $this->db->delete('subject_links', array('pubid' => $pubid)); 
+    }
+    
     public function managepublication($data, $id = NULL) {
         if ($id === NULL) {
-            if (!$this->db->insert('publications', $data)) {
-                log_message('error', print_r($this->db->error(), true));
-                return 'Error';
-            } else {
-                return 'Success';
-            }
-            
+           $dbdata = array('name' => $data['name'],
+                            'catid' => $data['catid'],
+                            'discid' => $data['discid'],
+                            'file' => $data['file'],
+                        );
+            $this->db->insert('publications', $dbdata);
+            $lastid = $this->db->insert_id();
+            $this->addsubjects($data['subjects'], $lastid);
         } else {
+            $this->removesubjects($data['subjects'], $id);
+            $dbdata = array('name' => $data['name'],
+                            'catid' => $data['catid'],
+                            'discid' => $data['discid'],
+                            'file' => $data['file'],
+                        );
             $this->db->where('id', $id);
-            if (!$this->db->update('publications', $data)) {
-                log_message('error', print_r($this->db->error(), true));
-                show_error(lang('database_error'));
-                return 'Error';
-            }else{
-                return 'Success';
-            }
+            $this->db->update('publications', $dbdata);
+            $this->addsubjects($data['subjects'], $id);
         }
     }
     

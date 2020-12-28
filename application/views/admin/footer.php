@@ -59,8 +59,6 @@
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": true,
-      "responsive": true,
     });
     
     $('#unconf').DataTable({

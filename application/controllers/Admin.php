@@ -325,27 +325,30 @@ class Admin extends CI_Controller {
                 if (!is_dir('./uploads')) {
                     @mkdir('./uploads', 0777, true);
                 }
-                $subjects = '';
-                        foreach ($this->input->post('subjects', TRUE) as $subject) {
-                            $subjects .= $subject . ',';
-                        }
-                        $subjects = rtrim($subjects, ',');
-                        $dbdata = array('name' => $this->input->post('publication', TRUE),
-                            'subjects' => $subjects,
-                            'catid' => $this->input->post('category', TRUE),
-                            'discid' => $this->input->post('discipline', TRUE),
-                            'file' => $data['upload_data']['file_name']
-                        );
+                        
                 if ($id === NULL) {
                     if (!$this->upload->do_upload('userfile')) {
                         $error = array('error' => $this->upload->display_errors());
                     } else {
                         $data = array('upload_data' => $this->upload->data());
                         
-
+$dbdata = array('name' => $this->input->post('publication', TRUE),
+                            'subjects' => $this->input->post('subjects', TRUE),
+                            'catid' => $this->input->post('category', TRUE),
+                            'discid' => $this->input->post('discipline', TRUE),
+                            'file' => $data['upload_data']['file_name'],
+                            'slug' => $this->slugify($this->input->post('publication', TRUE)),
+                            'created_at'=> time()
+                        );
                         $resp = $this->Admin_model->managepublication($dbdata);
                     }
                 } else {
+                    $dbdata = array('name' => $this->input->post('publication', TRUE),
+                            'subjects' => $this->input->post('subjects', TRUE),
+                            'catid' => $this->input->post('category', TRUE),
+                            'discid' => $this->input->post('discipline', TRUE),
+                        'slug' => $this->slugify($this->input->post('publication', TRUE))
+                        );
                     $resp = $this->Admin_model->managepublication($dbdata, $id);
                 }
                 redirect('admin/management-publicatii');
@@ -362,6 +365,7 @@ class Admin extends CI_Controller {
             $data['categories'] = $this->Admin_model->getcategories();
             $data['disciplines'] = $this->Admin_model->getdisciplines();
             $data['pubdata'] = $this->Admin_model->getpublication($id);
+            $data['subjects'] = $this->Admin_model->getpubsubjects($id);
             $this->load->view('admin/managepublication', $data);
         }
         $this->load->view('admin/footer');

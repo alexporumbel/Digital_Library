@@ -28,24 +28,26 @@
                         	</h3>
 			</div>
 			<div class="card-body">
-				<form class="login">
+                            <center><font color="red"><b><?=$this->session->flashdata('err_login');?></b></font></center>
+				<form class="login" action="" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="email">
+						<input type="text" name="email" class="form-control" placeholder="email">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="parola">
+						<input type="password" name="password" class="form-control" placeholder="parola">
 					</div>
 					
 					<div class="form-group">
+                                            <input type="submit" class="btn float-right login_btn" value="Login">
                                             <button class="btn float-left register_btn">Inregistrare</button>
-                                            <button class="btn float-right login_btn">Login</button>
+                                            
 					</div>
 				</form>
                             
@@ -59,29 +61,49 @@
 					</div>
 					<div class="form-group">
                                             <button class="btn float-right forget_btn">Recupereaza</button>
+                                            <button class="btn float-left back_btn">Inapoi</button>
+                                            
 					</div>
 				</form>
                             
                             <form class="register">
 					<div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="Nume">
+						<input type="text" name="nume" class="form-control" placeholder="Nume">
 						
 					</div>
 					<div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="Initiala Tatalui">
+						<input type="text" name="initiala" class="form-control" placeholder="Initiala Tatalui">
 					</div>
                                 <div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="Prenume">
+						<input type="text" name="prenume" class="form-control" placeholder="Prenume">
 					</div>
                                 <div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="Facultate">
+                                    <select name="facultate" class="form-control custom-select">
+                  <option selected disabled>Selecteaza</option>
+                  <option value="Facultate X">Facultate X</option>
+                  <option value="Facultate Y">Facultate Y</option>
+                  <option value="Facultate Z">Facultate Z</option>
+                                    </select>
 					</div>
                                 <div class="input-group form-group">
-						<input type="text" class="form-control" placeholder="An">
+						<select name="an" class="form-control custom-select">
+                  <option selected disabled>Selecteaza</option>
+                  <option value="1">Anul 1</option>
+                  <option value="2">Anul 2</option>
+                  <option value="3">Anul 3</option>
+                                    </select>
+					</div>
+                                <div class="input-group form-group">
+						<input type="text" name="email" class="form-control" placeholder="Email">
+					</div>
+                                <div class="input-group form-group">
+						<input type="password" name="parola" class="form-control" placeholder="Parola">
 					</div>
 					
 					<div class="form-group">
-                                            <button class="btn float-right register_btn">Inregistrare</button>
+                                            <button class="btn float-right registers_btn">Inregistrare</button>
+                                            <button class="btn float-left back_btn">Inapoi</button>
+                                            
 					</div>
 				</form>
 			</div>

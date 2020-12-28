@@ -33,10 +33,11 @@
               <div class="form-group">
                   <label>Subiecte</label>
                   <select name="subjects[]" class="select2 subjects" multiple="multiple" data-placeholder="Adauga subiecte" style="width: 100%;">
-                  <?php $subjects = explode(',', $pubdata['subjects']);
+                  <?php
+                  if(count($subjects) > 0){
                   foreach($subjects as $subject){
-                      echo "<option value='$subject' selected>$subject</option>";
-                  }?>
+                      echo "<option value='" . $subject['subject'] ."' selected>" . $subject['subject'] ."</option>";
+                  } }?>
                   </select>
                 </div>
               <div class="form-group">
