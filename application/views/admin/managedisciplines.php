@@ -35,7 +35,7 @@
                 foreach($disciplines as $discipline){
                 echo "<tr>";
                 echo "<td>" . $discipline['discipline'] . "</td>";
-                echo "<td>0</td>";
+                echo "<td>" . $discipline['disccount'] . "</td>";
                 echo '<td><div class="tools">
                       <a title="Modifica disciplina" href="modifica-disciplina/' . $discipline['id'] .'"><i class="fas fa-edit"></i></a>
                     </div></td>';

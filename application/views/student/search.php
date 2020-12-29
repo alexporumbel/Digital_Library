@@ -5,7 +5,7 @@
             <div class="col-lg-7 offset-1 py-3">
                 <div class="docs-overview py-5">
                     <h3 class="row-title-text mb-3">
-                        <span class="card-title-text">Ultimele Publicatii Adaugate</span>
+                        <span class="card-title-text">Cautare <?=ucfirst($search);?></span>
                     </h3>
                     <div class="row">
                         <?php
@@ -16,7 +16,7 @@
                             <div class="col-12 col-lg-4 py-3">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                       <h6 class="card-title mb-3">
+                                        <h6 class="card-title mb-3">
                                             <span class="card-title-text"><a href="<?= $publication['slug'] .'_pub'. $publication['id']; ?>"><?= ucfirst($publication['name']); ?></a></span>
                                         </h6>
                                         <div class="card-text">
@@ -25,9 +25,7 @@
                                             </span>  
                                            <span class="card-list"><b>Discipina:</b><a href="<?=base_url();?>disciplina/<?= $publication['discslug']; ?>"><?= $publication['discipline']; ?></a></span>
                                             <span class="card-list"><b>Categoria:</b><a href="<?=base_url();?>categorie/<?= $publication['catslug']; ?>"><?= $publication['category']; ?></a></span>
-                                            <?php if ($publication['year']) { echo'<span class="card-list"><b>An:</b> <a href="' . base_url() .'an/' . $publication['year'] .'">Anul '. $publication['year'] .'</a></span>'; }?> 
-                                            
-                                                <span class="card-list"><b>Subiecte:</b> 
+                                            <span class="card-list"><b>Subiecte:</b> 
                                                 <?php
                                                 for ($x = 0; $x < count($subjectz); $x++) {
                                                    echo "<a href='". base_url() ."subiect/". $subjslugs[$x] ."'>#". $subjectz[$x]."</a> ";

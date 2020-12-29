@@ -26,7 +26,8 @@
             </div>
             <div class="card-body">
                 <form class="form" method="POST" enctype="multipart/form-data" action="<?= @$id ? site_url("admin/managepublication/$id") : site_url('admin/managepublication');?>">
-              <div class="form-group">
+              <center><font color="red"><b><?=@$formerror;?></b></font></center>
+                    <div class="form-group">
                 <label for="inputName">Nume Publicatie</label>
                 <input name="publication" type="text" id="publication" value="<?= @$pubdata ? $pubdata['name'] : '';?>" class="form-control">
               </div>
@@ -37,7 +38,13 @@
                   if(count($subjects) > 0){
                   foreach($subjects as $subject){
                       echo "<option value='" . $subject['subject'] ."' selected>" . $subject['subject'] ."</option>";
-                  } }?>
+                  } }
+                  if(count($allsubjects) > 0){
+                  foreach($allsubjects as $subjectz){
+                      echo "<option value='" . $subjectz['subject'] ."' >" . $subjectz['subject'] ."</option>";
+                  } }
+                  ?>
+                      
                   </select>
                 </div>
               <div class="form-group">
@@ -67,6 +74,19 @@
                   }?>
                 </select>
               </div>
+                    <div class="form-group">
+                <label for="inputStatus">An (optional)</label>
+                <select name="year" class="form-control custom-select">
+                  <option selected value="">Nespecificat</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'I' ? 'selected' : '';?>  value="I">Anul I</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'II' ? 'selected' : '';?> value="II">Anul II</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'III' ? 'selected' : '';?> value="III">Anul III</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'IV' ? 'selected' : '';?> value="IV">Anul IV</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'V' ? 'selected' : '';?> value="V">Anul V</option>
+                  <option <?= @$pubdata && $pubdata['year'] === 'VI' ? 'selected' : '';?> value="VI">Anul VI</option>
+                   
+                </select>
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -87,13 +107,14 @@
                     <label for="exampleInputFile">Incarca Publicatia</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" name="userfile" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Alege fisier</label>
+                        <input type="file" name="userfile" class="custom-file-input" id="pubFile">
+                        <label class="custom-file-label" for="exampleInputFile"><?= @$pubdata['original_file'] ? $pubdata['original_file'] : 'Alege fisier';?></label>
                       </div>
                     </div>
                   </div>
                 <div class="form-check">
-                    <input type="checkbox" name="downloadrights" class="form-check-input" id="downloadrights">
+                    <input type="hidden" name="downloadrights" value="0">
+                    <input type="checkbox" <?= @$pubdata && $pubdata['download_rights'] > 0 ? 'checked' : '';?> name="downloadrights" value="1" class="form-check-input" id="downloadrights">
                     <label class="form-check-label" for="exampleCheck1">Permite descarcarea publicatiei</label>
                   </div>
             </div>
@@ -104,7 +125,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <input type="submit" value="Creeaza" class="btn btn-success float-right">
+          <input type="submit" value="Salveaza" class="btn btn-success float-right">
         </div>
       </div>
         </form>

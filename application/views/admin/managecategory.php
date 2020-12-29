@@ -26,6 +26,7 @@
               <!-- form start -->
               <form class="form" method="POST" action="<?= @$id ? site_url("admin/managecategory/$id") : site_url('admin/managecategory');?>">
                 <div class="card-body">
+                    <center><font color="red"><b><?=@$formerror;?></b></font></center>
                   <div class="form-group">
                     <label for="categorie">Categorie</label>
                     <input type="text" class="form-control" id="categorie" name='categorie' value="<?= @$categorydata ? $categorydata['category'] : '';?>" placeholder="Categorie">

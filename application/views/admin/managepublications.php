@@ -41,7 +41,8 @@
                 echo "<td>" . $publication['discipline'] . "</td>";
                 echo "<td>" . $publication['subjects'] . "</td>";
                 echo '<td><div class="tools">
-                      <a title="Modificare categorie" href="modifica-publicatie/' . $publication['id'] .'"><i class="fas fa-edit"></i></a>
+                      <a title="Modifica publicatie" href="modifica-publicatie/' . $publication['id'] .'"><i class="fas fa-edit"></i></a>
+                      <a title="Sterge publicatie" href="sterge-publicatie/' . $publication['id'] .'"><i class="fas fa-trash-alt"></i></a>
                     </div></td>';
                 
                 echo "</tr>";

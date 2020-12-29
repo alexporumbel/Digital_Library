@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>CoderDocs - Bootstrap 4 Documentation Template For Software Projects</title>
+    <title>Digital Library</title>
     
     <!-- Meta -->
     <meta charset="utf-8">
@@ -50,4 +50,39 @@
             </div><!--//container-->
         </div><!--//branding-->
     </header><!--//header-->
-    
+    <div class="page-header theme-bg-dark py-5 text-center position-relative">
+    <div class="theme-bg-shapes-right"></div>
+    <div class="theme-bg-shapes-left"></div>
+    <div class="container">
+        <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
+        <div class="page-intro single-col-max mx-auto">Everything you need.</div>
+        <div class="main-search-box pt-3 d-block mx-auto">
+            <form class="search-form w-100 form-inline" method="POST" action="<?=site_url('cauta');?>">
+                <select name="category" class="form-control custom-select">
+                  <option value="0" selected>Toate categoriile</option>
+                  <?php foreach ($categories as $category) {
+                      echo "<option value=". $category['id'] .">". ucfirst($category['category']) ."</option>";
+                           } ?>
+                </select>
+                <select name="discipline" class="form-control custom-select">
+                  <option value="0" selected>Toate disciplinele</option>
+                  <?php foreach ($disciplines as $discipline) {
+                      echo "<option value=". $discipline['id'] .">". ucfirst($discipline['discipline']) ."</option>";
+                           } ?>
+                </select>
+                 <select name="year" class="form-control custom-select">
+                  <option selected value="">Toti anii</option>
+                  <option value="I">Anul I</option>
+                  <option value="II">Anul II</option>
+                  <option value="III">Anul III</option>
+                  <option value="IV">Anul IV</option>
+                  <option value="V">Anul V</option>
+                  <option value="VI">Anul VI</option>
+                   
+                </select>
+                <input type="text" placeholder="Cauta publicatie..." name="search" class="form-control search-input">
+                <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div><!--//page-header-->

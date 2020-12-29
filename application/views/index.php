@@ -19,7 +19,9 @@
 </head>
 <body>
 <div class="container">
+    
 	<div class="d-flex justify-content-center h-100">
+              
 		<div class="card">
 			<div class="card-header">
 				<h3>
@@ -29,7 +31,10 @@
 			</div>
 			<div class="card-body">
                             <center><font color="red"><b><?=$this->session->flashdata('err_login');?></b></font></center>
-				<form class="login" action="" method="post">
+                            <span class="error-message"><center><font color="red"><b>Datele de logare nu sunt valide</b></font></center></span>
+                            <div class="register-msg"><span>Contul tau a fost inregistrat si asteapta aprobarea unui administrator. Vei primi un email cand contul va fi aprobat!</span></div>	
+                            <div class="forgot-msg"><span>Ti-am trimis un email cu instructiuni pentru resetarea parolei!</span></div>	
+                            <form class="login" action="" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -56,11 +61,33 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="email">
+						<input type="text" name="emailf" class="form-control" placeholder="adresa email">
 						
 					</div>
 					<div class="form-group">
                                             <button class="btn float-right forget_btn">Recupereaza</button>
+                                            <button class="btn float-left back_btn">Inapoi</button>
+                                            
+					</div>
+				</form>
+                            
+                            <form class="change-password">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="passf" class="form-control">
+						
+					</div>
+                                <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="passl" class="form-control">
+						
+					</div>
+					<div class="form-group">
+                                            <button class="btn float-right changepass-btn">Schimba parola</button>
                                             <button class="btn float-left back_btn">Inapoi</button>
                                             
 					</div>
@@ -79,7 +106,7 @@
 					</div>
                                 <div class="input-group form-group">
                                     <select name="facultate" class="form-control custom-select">
-                  <option selected disabled>Selecteaza</option>
+                  <option selected value="" disabled>Selecteaza</option>
                   <option value="Facultate X">Facultate X</option>
                   <option value="Facultate Y">Facultate Y</option>
                   <option value="Facultate Z">Facultate Z</option>
@@ -87,14 +114,17 @@
 					</div>
                                 <div class="input-group form-group">
 						<select name="an" class="form-control custom-select">
-                  <option selected disabled>Selecteaza</option>
-                  <option value="1">Anul 1</option>
-                  <option value="2">Anul 2</option>
-                  <option value="3">Anul 3</option>
+                  <option selected value="" disabled>Selecteaza</option>
+                  <option value="I">Anul I</option>
+                  <option value="II">Anul II</option>
+                  <option value="III">Anul III</option>
+                  <option value="IV">Anul IV</option>
+                  <option value="V">Anul V</option>
+                  <option value="VI">Anul VI</option>
                                     </select>
 					</div>
                                 <div class="input-group form-group">
-						<input type="text" name="email" class="form-control" placeholder="Email">
+						<input type="text" name="emailr" class="form-control" placeholder="Email">
 					</div>
                                 <div class="input-group form-group">
 						<input type="password" name="parola" class="form-control" placeholder="Parola">

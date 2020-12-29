@@ -31094,3 +31094,19 @@ a.text-muted:hover {
   color: #ffffff;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+
+.custom-file-inputr{
+        display: inline-block;
+		overflow: hidden;
+        position: relative;
+    }
+    .custom-file-inputr input[type="file"]{
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+    }

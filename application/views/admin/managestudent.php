@@ -26,7 +26,7 @@
               <!-- form start -->
               <form class="form" method="POST" action="<?= @$id ? site_url("admin/managestudent/$id") : site_url('admin/managestudent');?>">
                 <div class="card-body">
-                    <center><font color="red"><b><?=$this->session->flashdata('err_login');?></b></font></center>
+                    <center><font color="red"><b><?=@$formerror;?></b></font></center>
                   <div class="form-group">
                     <label for="nume">Nume</label>
                     <input type="text" class="form-control" id="nume" name='nume' value="<?= @$studentdata ? $studentdata['name'] : '';?>" placeholder="Popescu">

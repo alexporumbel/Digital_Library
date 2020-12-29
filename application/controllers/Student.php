@@ -7,6 +7,7 @@ class Student extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->helper('download');
         $this->load->model('Student_model');
     }
 
@@ -36,7 +37,7 @@ class Student extends CI_Controller {
 
                     redirect('home');
                 } else {
-                    $this->session->set_flashdata('err_login', 'Wrong username or password!');
+                    $this->session->set_flashdata('err_login', 'Date de logare incorecte!');
                     redirect('/');
                 }
             }
@@ -77,7 +78,7 @@ class Student extends CI_Controller {
 
     function login_check() {
         if (!$this->session->userdata('logged_in')) {
-            redirect('admin');
+            redirect('/');
         }
         $this->username = $this->session->userdata('logged_in');
     }
@@ -90,10 +91,13 @@ class Student extends CI_Controller {
     public function home() {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
         $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
         $data['publications'] = $this->Student_model->getlastpublications();
         $this->load->view('student/header', $header);
@@ -104,10 +108,13 @@ class Student extends CI_Controller {
     public function discipline($discipline) {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
         $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['publications'] = $this->Student_model->getbydiscipine($discipline);
         $data['discipline'] = $this->Student_model->getdisciplinefromslug($discipline);
         $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
@@ -119,10 +126,13 @@ class Student extends CI_Controller {
     public function category($category) {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
         $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['publications'] = $this->Student_model->getbycategory($category);
         $data['category'] = $this->Student_model->getcategoryfromslug($category);
         $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
@@ -131,13 +141,38 @@ class Student extends CI_Controller {
         $this->load->view('student/footer');
     }
     
-    public function subject($subject) {
+        public function year($year) {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
         $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
+        if($year==='nespecificat'){
+        $data['publications'] = $this->Student_model->getbyyear('');
+        }else{
+            $data['publications'] = $this->Student_model->getbyyear($year);
+        }
+        $data['year'] = $year;
+        $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
+        $this->load->view('student/header', $header);
+        $this->load->view('student/year', $data); 
+        $this->load->view('student/footer');
+    }
+    
+    public function subject($subject) {
+        $this->login_check();
+        $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
+        $data = array();
+        $data['categories'] = $this->Student_model->catlist();
+        $data['disciplines'] = $this->Student_model->disclist();
+        $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['publications'] = $this->Student_model->getbysubject($subject);
         $data['subject'] = $this->Student_model->getsubjectfromslug($subject);
         $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
@@ -149,10 +184,13 @@ class Student extends CI_Controller {
     public function favorites() {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
         $data['subjects'] = $this->Student_model->subjlist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['publications'] = $this->Student_model->getfavorites($this->session->userdata('uid'));
         $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
         $this->load->view('student/header', $header);
@@ -163,9 +201,12 @@ class Student extends CI_Controller {
     public function publication($id) {
         $this->login_check();
         $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
         $data = array();
         $data['categories'] = $this->Student_model->catlist();
         $data['disciplines'] = $this->Student_model->disclist();
+        $data['years'] = $this->Student_model->yearslist();
         $data['subjects'] = $this->Student_model->subjlist();
         $data['publication'] = $this->Student_model->getpublication($id);
         $this->load->view('student/header', $header);
@@ -173,6 +214,28 @@ class Student extends CI_Controller {
         $this->load->view('student/footer');
     }
 
+    function search() {
+            $this->login_check();
+            if ($_POST) {
+        $header = array();
+        $header['categories'] = $this->Student_model->catlist();
+        $header['disciplines'] = $this->Student_model->disclist();
+        $data = array();
+        $data['categories'] = $this->Student_model->catlist();
+        $data['disciplines'] = $this->Student_model->disclist();
+        $data['years'] = $this->Student_model->yearslist();
+        $data['subjects'] = $this->Student_model->subjlist();
+        $data['search'] = $this->input->post('search', TRUE);
+        $data['favcount'] = $this->Student_model->favcount($this->session->userdata('uid'));
+        $data['publications'] = $this->Student_model->search($this->input->post('category', TRUE), $this->input->post('discipline', TRUE), $this->input->post('year', TRUE), $this->input->post('search', TRUE));
+        $this->load->view('student/header', $header);
+        $this->load->view('student/search', $data);
+        $this->load->view('student/footer');
+            }else{
+                redirect('/');
+            }
+    }
+    
     function addtofav() {
         if ($this->input->is_ajax_request()) {
             $this->Student_model->addtofav($this->input->post('pubid', TRUE), $this->session->userdata('uid'));
@@ -182,6 +245,20 @@ class Student extends CI_Controller {
     function unfav() {
         if ($this->input->is_ajax_request()) {
             $this->Student_model->unfav($this->input->post('pubid', TRUE), $this->session->userdata('uid'));
+        }
+    }
+    
+     function request() {
+        if ($this->input->is_ajax_request()) {
+            $this->Student_model->request($this->input->post('subiect', TRUE), $this->input->post('mesaj', TRUE), $this->session->userdata('uid'));
+        }
+    }
+    
+    function download($id){
+        $this->Student_model->download($id, $this->session->userdata('uid'));
+        $pub = $this->Student_model->getpublication($id);
+        if($pub['download_rights'] > 0){
+            force_download('./uploads/' . $pub['file'], NULL);
         }
     }
 }

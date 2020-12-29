@@ -26,6 +26,7 @@
               <!-- form start -->
               <form class="form" method="POST" action="<?= @$id ? site_url("admin/managediscipline/$id") : site_url('admin/managediscipline');?>">
                 <div class="card-body">
+                    <center><font color="red"><b><?=@$formerror;?></b></font></center>
                   <div class="form-group">
                     <label for="disciplina">Disciplina</label>
                     <input type="text" class="form-control" id="disciplina" name='disciplina' value="<?= @$disciplinedata ? $disciplinedata['discipline'] : '';?>" placeholder="Disciplina">
@@ -35,7 +36,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Salveaza</button>
                 </div>
               </form>
             </div>

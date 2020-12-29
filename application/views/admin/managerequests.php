@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Management Categorii</h1>
+            <h1>Solicitari Publicatii</h1>
           </div>
           
         </div>
@@ -18,26 +18,30 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Lista Categorii</h3> <a href="<?= base_url('admin/adauga-categorie'); ?>" class="btn btn-info float-right"><i class="fas fa-plus"></i> Adauga categorie</a>
+              <h3 class="card-title">Lista Solicitari</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="studs" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Categorie</th>
-                  <th>Total publicatii</th>
+                  <th>Student</th>
+                  <th>Subiect</th>
+                  <th>Mesaj</th>
+                  <th>Stare solicitare</th>
                   <th>Management</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php 
-                foreach($categories as $category){
+                foreach($requests as $request){ 
                 echo "<tr>";
-                echo "<td>" . $category['category'] . "</td>";
-                echo "<td>" . $category['catcount'] . "</td>";
+                echo "<td>" . $request['name'] .' ' . $request['fathers_initial'] . '. ' . $request['lname']. "</td>";
+                echo "<td>" . $request['subject'] . "</td>";
+                echo "<td>" . $request['message'] . "</td>";
+                echo "<td>" . $request['message'] . "</td>";
                 echo '<td><div class="tools">
-                      <a title="Modificare categorie" href="modifica-categorie/' . $category['id'] .'"><i class="fas fa-edit"></i></a>
+                      <a title="Vezi solicitare" href="solicitare/' . $request['id'] .'"><i class="fas fa-eye"></i></a>
                     </div></td>';
                 
                 echo "</tr>";
@@ -46,8 +50,10 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Categorie</th>
-                  <th>Total publicatii</th>
+                   <th>Student</th>
+                  <th>Subiect</th>
+                  <th>Mesaj</th>
+                  <th>Stare solicitare</th>
                   <th>Management</th>
                 </tr>
                 </tfoot>

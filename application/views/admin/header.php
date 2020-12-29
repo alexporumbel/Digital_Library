@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
     <!-- Toastr -->
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/toastr/toastr.min.css'); ?>">
-  <link rel="stylesheet" href="<?= base_url('assets/admin/dist/css/adminlte.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/admin/dist/css/adminlte.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/datatables-bs4/css/responsive.bootstrap4.min.css'); ?>">
   <!-- Google Font: Source Sans Pro -->
@@ -112,7 +112,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?= base_url('admin/solicitari-publicatii'); ?>" class="nav-link">
               <i class="nav-icon fas fa-bell"></i>
               <p>
                 Solicitari Publicatii
@@ -170,34 +170,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+           <li class="nav-item">
+            <a href="<?= base_url('admin/home'); ?>" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Statistici
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-            </ul>
           </li>
           
           <li class="nav-item has-treeview">

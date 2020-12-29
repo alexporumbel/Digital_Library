@@ -71,8 +71,16 @@ class Student_model extends CI_Model
         return $qry->result_array();
     }
     
+     public function yearslist(){
+        $this->db->select('year, COUNT(year) as yearcount');
+        $this->db->order_by("yearcount", "DESC");
+        $this->db->group_by("id");
+        $qry = $this->db->get('publications');
+        return $qry->result_array();
+    }
+    
     public function getlastpublications() {
-        $this->db->select("publications.id, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug ");
+        $this->db->select("publications.id, publications.year, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug ");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -83,7 +91,7 @@ class Student_model extends CI_Model
     }
     
     public function getbydiscipine($discipline) {
-        $this->db->select("publications.id, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->select("publications.id, publications.year, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -103,7 +111,7 @@ class Student_model extends CI_Model
     }
     
      public function getbycategory($category) {
-        $this->db->select("publications.id, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->select("publications.id, publications.slug, publications.year, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -123,7 +131,7 @@ class Student_model extends CI_Model
     }
     
     public function getbysubject($subject) {
-        $this->db->select("publications.id, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->select("publications.id, publications.slug, publications.year, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -134,8 +142,20 @@ class Student_model extends CI_Model
         return $qry->result_array();
     }
     
+    public function getbyyear($year) {
+        $this->db->select("publications.id, publications.slug, publications.year, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->join('categories', 'publications.catid = categories.id', 'inner');
+        $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
+        $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
+        $this->db->join('subjects', 'subject_links.subid=subjects.id', 'inner');
+         $this->db->where('publications.year', $year);
+        $this->db->group_by("publications.id");
+        $qry = $this->db->get('publications');
+        return $qry->result_array();
+    }
+    
     public function getfavorites($uid) {
-        $this->db->select("publications.id, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->select("publications.id, publications.slug, publications.year, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -156,7 +176,7 @@ class Student_model extends CI_Model
     }
     
      public function getpublication($id) {
-    $this->db->select("publications.id, publications.file, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+    $this->db->select("publications.id, publications.file, publications.year, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
         $this->db->join('categories', 'publications.catid = categories.id', 'inner');
         $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
         $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
@@ -174,6 +194,8 @@ class Student_model extends CI_Model
         $resultArray = $result->row_array();
         if ($result->num_rows() < 1) {
         $this->db->insert('favorites', array('sid' => $sid, 'pubid'=>$pubid));
+        $this->db->insert('fav_logs', array('sid' => $sid, 'pubid' => $pubid, 'timestamp' => time()));
+        
     }
     }
     
@@ -190,5 +212,52 @@ class Student_model extends CI_Model
         $qry = $this->db->get('favorites');
         $ress = $qry->row();
             return $ress->totalfav;
+    }
+    
+    public function search($category, $discipline, $year, $search) {
+    $this->db->select("publications.id, publications.file, publications.year, publications.slug, categories.category as category, disciplines.discipline as discipline, publications.name, publications.file, publications.download_rights, GROUP_CONCAT(subjects.subject SEPARATOR ',') as subjects, GROUP_CONCAT(subjects.slug SEPARATOR ',') as subjslugs, disciplines.slug as discslug, categories.slug as catslug");
+        $this->db->join('categories', 'publications.catid = categories.id', 'inner');
+        $this->db->join('disciplines', 'publications.discid = disciplines.id', 'inner');
+        $this->db->join('subject_links', 'subject_links.pubid= publications.id', 'inner');
+        $this->db->join('subjects', 'subject_links.subid=subjects.id', 'inner');
+        if($category > 0){
+         $this->db->where('publications.catid', $category);
+        }
+        if($discipline > 0){
+         $this->db->where('publications.discid', $discipline);
+        }
+        if($year !==''){
+         $this->db->where('publications.year', $year);
+        }
+        $s = explode(' ', $search);
+        foreach ($s as $slg) {
+            $this->db->like('publications.name', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('subjects.slug', $slg);
+        }
+        $this->db->group_by("publications.id");
+        $qry = $this->db->get('publications');
+        return $qry->result_array();
+    }
+    
+    public function request($publicatie, $mesaj, $uid){
+        if (!$this->db->insert('requests', array('sid'=>$uid, 'subject'=> $publicatie, 'message'=>$mesaj, 'timestamp'=>time()))) {
+                log_message('error', print_r($this->db->error(), true));
+                return 'Error';
+            } else {
+                return 'Success';
+            }
+    }
+    
+    public function download($pubid, $sid){
+         $this->db->where('pubid', $pubid);
+         $this->db->where('sid', $sid);
+        $result = $this->db->get('dwd_logs');
+        $resultArray = $result->row_array();
+        if ($result->num_rows() < 1) {
+        $this->db->insert('dwd_logs', array('sid' => $sid, 'pubid' => $pubid, 'timestamp' => time()));
+        
+    }
     }
 }

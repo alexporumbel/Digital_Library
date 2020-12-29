@@ -23,6 +23,26 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
+.change-password{
+    display: none;
+}
+
+.error-message{
+    display: none;
+}
+
+.register-msg{
+    font-weight: 500;
+    color: #fff;
+    display: none;
+}
+
+.forgot-msg{
+    font-weight: 500;
+    color: #fff;
+    display: none;
+}
+
 .social_icon span{
 font-size: 60px;
 margin-left: 10px;

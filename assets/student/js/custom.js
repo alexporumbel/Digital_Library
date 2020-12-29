@@ -30,4 +30,21 @@
 });
         });
     });
+        $(document).on("click", ".sendquery", function (e) {
+         e.preventDefault();
+         $('#exampleModal').modal('toggle');
+        $.post(baseUrl + "trimitesolicitare", {
+            subiect: $('input[name="subiect"]').val(),
+            mesaj: $('textarea[name="mesaj"]').val()
+        }).done(function () {
+            $('input[name="subiect"]').val('');
+            $('textarea[name="mesaj"]').val('');
+            Swal.fire({
+  icon: 'success',
+  title: 'Solicitarea a fost trimisa',
+  showConfirmButton: true,
+  timer: 1500
+});
+        });
+    });
     });

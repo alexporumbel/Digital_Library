@@ -2370,7 +2370,6 @@ textarea.form-control.is-invalid {
 
 .form-inline {
     display: flex;
-    flex-flow: row wrap;
     align-items: center
 }
 
@@ -2402,7 +2401,9 @@ textarea.form-control.is-invalid {
     }
     .form-inline .input-group,
     .form-inline .custom-select {
-        width: auto
+        width: auto;
+        margin-right: -7px;
+border: 0;
     }
     .form-inline .form-check {
         display: flex;
@@ -10480,14 +10481,13 @@ a.theme-link:hover {
 
 .search-form .search-input {
     font-size: 0.875rem;
-    border-radius: 1.5rem;
-    padding-right: 3rem;
-    padding-left: 1.5rem
+    border:0;
+    width: 210px;
+}
+.search-form .custom-select {
+    font-size: 0.875rem;
 }
 
-.search-form .search-input:focus {
-    border-color: #e7e9ed
-}
 
 .search-form .search-btn {
     color: #828d9f;
@@ -10496,7 +10496,7 @@ a.theme-link:hover {
     position: absolute;
     right: 0;
     top: 0.15rem;
-    margin-right: 0
+    margin-right: -35px;
 }
 
 .search-form .search-btn:active,
