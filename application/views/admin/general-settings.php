@@ -27,10 +27,29 @@
               <form class="form" method="POST" action="<?php echo site_url('admin/generalsettings');?>">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="nume">Nume Site</label>
-                    <input type="text" class="form-control" id="numesite" name='library_name' value="<?= @$value['library_name']; ?>" placeholder="Biblioteca Electronica">
+                    <label for="library_name">Nume Site</label>
+                    <input type="text" class="form-control" id="library_name" name='library_name' value="<?= @$value['library_name']; ?>" placeholder="Biblioteca Electronica">
                   </div>
-                  
+                    <div class="form-group">
+                    <label for="mail_server">Server Mail</label>
+                    <input type="text" class="form-control" id="mail_server" name='mail_server' value="<?= @$value['mail_server']; ?>" placeholder="">
+                  </div>
+                    <div class="form-group">
+                    <label for="mail_port">Port Server Mail</label>
+                    <input type="text" class="form-control" id="mail_port" name='mail_port' value="<?= @$value['mail_port']; ?>" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="mail_address">Adresa Email</label>
+                    <input type="text" class="form-control" id="mail_address" name='mail_address' value="<?= @$value['mail_address']; ?>" placeholder="">
+                  </div>
+                    <div class="form-group">
+                    <label for="mail_password">Parola email</label>
+                    <input type="password" class="form-control" id="mail_password" name='mail_password' value="<?= @$value['mail_password']; ?>" placeholder="">
+                  </div>
+                    <div class="form-group">
+                    <label for="mail_name">Nume Expeditor</label>
+                    <input type="text" class="form-control" id="mail_name" name='mail_name' value="<?= @$value['mail_name']; ?>" placeholder="">
+                  </div>
                 </div>
                 <!-- /.card-body -->
 

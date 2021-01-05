@@ -24,6 +24,24 @@ document.querySelector('.custom-file-inputr').addEventListener('change',function
 });
 }
 
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Astazi'       : [moment(), moment()],
+          'Ieri'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Saptamana curenta' : [moment().subtract(6, 'days'), moment()],
+          'Ultimele 30 de zile': [moment().subtract(29, 'days'), moment()],
+          'Luna curenta'  : [moment().startOf('month'), moment().endOf('month')],
+          'Luna precedenta'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    );
+
   $('.subjects').select2({
            tags: true,
        });
@@ -32,6 +50,39 @@ document.querySelector('.custom-file-inputr').addEventListener('change',function
     $('.select2bs4').select2({
       theme: 'bootstrap4'
     });
+    
+    $('#topviews').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+    });
+    
+    $('#topfavs').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+    });
+    
+    $('#topdownloads').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+    });
+    
+    $('#toptime').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+    });
+    
     $('#studs').DataTable({
       "paging": true,
       "lengthChange": true,

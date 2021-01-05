@@ -33,9 +33,8 @@
 <script src="<?= base_url('assets/admin/plugins/raphael/raphael.min.js'); ?>"></script>
 <script src="<?= base_url('assets/admin/plugins/jquery-mapael/jquery.mapael.min.js'); ?>"></script>
 <script src="<?= base_url('assets/admin/plugins/jquery-mapael/maps/usa_states.min.js'); ?>"></script>
-<!-- ChartJS -->
-<script src="<?= base_url('assets/admin/plugins/chart.js/Chart.min.js'); ?>"></script>
-
+<script src="<?= base_url('assets/admin/plugins/moment/moment.min.js'); ?>"></script>
+<script src="<?= base_url('assets/admin/plugins/daterangepicker/daterangepicker.js'); ?>"></script>
 <!-- PAGE SCRIPTS -->
 <script src="<?= base_url('assets/admin/plugins/toastr/toastr.min.js'); ?>"></script>
 

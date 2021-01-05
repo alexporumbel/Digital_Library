@@ -26,9 +26,9 @@
                   <center><font color="red"><b><?=@$formerror;?></b></font></center>
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="<?= base_url('assets/admin/dist/img/user1-128x128.jpg'); ?>" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="<?= base_url('assets/admin/dist/img/avatar5.png'); ?>" alt="user image">
                         <span class="username">
-                          <a href="#"><?= $request['name'] .' '. $request['fathers_initial'] .'. '. $request['lname']; ?> - <?= $request['faculty'] .' Anul'. $request['year']; ?></a>
+                          <a href="#"><?= $request['name'] .' '. $request['fathers_initial'] .'. '. $request['lname']; ?> - <?= $request['faculty'] .' Anul '. $request['year']; ?></a>
                         </span>
                         <span class="description"><?=$request['subject'];?> - Trimis la <?=date('d-m-Y h:i', $request['timestamp']);?></span>
                       </div>
@@ -59,7 +59,7 @@
                     <?php }else{ ?>
                     <div class="post clearfix">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="<?= base_url('assets/admin/dist/img/user1-128x128.jpg'); ?>" alt="User Image">
+                        <img class="img-circle img-bordered-sm" src="<?= base_url('assets/admin/dist/img/avatar5.png'); ?>" alt="User Image">
                         <span class="username">
                           <a href="#"><?= $request['adminname']; ?> - Administrator</a>
                         </span>
@@ -67,7 +67,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                        <?= $request['response']; ?>
+                        <?= @$request['response']; ?>
                       </p>
                       <?php if(@$request['original_file'] !==''){ ?>
                       <p>

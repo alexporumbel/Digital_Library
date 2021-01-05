@@ -1,8 +1,45 @@
+  var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/Digital_Library/";  
+    function activityWatcher(){
+    var running = false;
+    function activity(){
+        //reset the secondsSinceLastActivity variable
+        //back to 0
+        if(running === false){
+             running= true;
+        setTimeout(function(){
+            $.post(baseUrl + "log", {
+        }).done(function () {
+        running = false;
+        });
+
+    }, 10000);
+        }
+       
+        
+    }
+
+    //An array of DOM events that should be interpreted as
+    //user activity.
+    var activityEvents = [
+        'mousedown', 'mousemove', 'keydown',
+        'scroll', 'touchstart'
+    ];
+
+    //add these events to the document.
+    //register the activity function as the listener parameter.
+    activityEvents.forEach(function(eventName) {
+        document.addEventListener(eventName, activity, true);
+    });
+
+
+}
 
   $(document).ready(function () {
 
-      var getUrl = window.location;
-    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/Digital_Library/";  
+
+activityWatcher();
+    
     $(document).on("click", ".addtofav", function (e) {
          e.preventDefault();
         $.post(baseUrl + "addtofav", {
@@ -48,3 +85,4 @@
         });
     });
     });
+    

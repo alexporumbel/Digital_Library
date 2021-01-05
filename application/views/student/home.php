@@ -39,9 +39,15 @@
                                     </div><!--//card-body-->
                                 </div><!--//card-->
                             </div><!--//col-->
+                            
 <?php } ?>
 
                     </div><!--//row-->
+	<div class="row">
+            <div class="col-6 offset-3 my-5">
+<?= $pagination; ?>
+	</div>
+	</div>
                 </div><!--//container-->
             </div>
             <div class="col-lg-3" style="padding-top: 8rem !important;">
@@ -59,7 +65,7 @@
                             <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder mr-2"><i class="fas fa-book-reader"></i></span>Discipline</a></li>
                             <?php
                             foreach ($disciplines as $discipline) {
-                                echo '<li class="nav-item"><a class="nav-link" href="'. base_url() .'#'. $discipline['slug'] .'">' . ucfirst($discipline['discipline']) . '(' . $discipline['disccount'] . ')</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="'. base_url() .'disciplina/'. $discipline['slug'] .'">' . ucfirst($discipline['discipline']) . '(' . $discipline['disccount'] . ')</a></li>';
                             }
                             ?>
                             <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder mr-2"><i class="fas fa-calendar-alt"></i></span>Ani</a></li>

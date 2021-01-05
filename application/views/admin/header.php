@@ -14,6 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/select2/css/select2.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/daterangepicker/daterangepicker.css'); ?>">
     <!-- Toastr -->
   <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/toastr/toastr.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/admin/dist/css/adminlte.css'); ?>">
@@ -116,7 +117,9 @@
               <i class="nav-icon fas fa-bell"></i>
               <p>
                 Solicitari Publicatii
-                <span class="right badge badge-danger">1</span>
+                <?php if($newrequests > 0) {
+                  echo "<span class='right badge badge-danger'>$newrequests</span>";
+                  } ?>
               </p>
             </a>
           </li>
@@ -162,7 +165,7 @@
               <li class="nav-item">
                 <a href="<?= base_url('admin/studenti-neconfirmati'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Studenti neconfirmati</p>
+                  <p>Studenti neaprobati</p>
                   <?php if($unconfirmedcount > 0) {
                   echo "<span class='right badge badge-danger'>$unconfirmedcount</span>";
                   } ?>

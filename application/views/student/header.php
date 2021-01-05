@@ -57,7 +57,7 @@
         <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
         <div class="page-intro single-col-max mx-auto">Everything you need.</div>
         <div class="main-search-box pt-3 d-block mx-auto">
-            <form class="search-form w-100 form-inline" method="POST" action="<?=site_url('cauta');?>">
+            <form class="search-form w-100 form-inline" method="POST" action="<?=site_url('caut');?>">
                 <select name="category" class="form-control custom-select">
                   <option value="0" selected>Toate categoriile</option>
                   <?php foreach ($categories as $category) {

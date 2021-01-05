@@ -40,6 +40,14 @@ class Admin_model extends CI_Model {
         }
         return $data;
     }
+    
+    public function getstudentemail($id) {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        $result = $this->db->get('students');
+        $ress = $result->row();
+        return $ress->email;
+    }
 
     public function updateSettingsValues($key, $val) {
         $this->db->where('key', $key);
@@ -95,7 +103,9 @@ class Admin_model extends CI_Model {
     public function changeStudentStatus($studentId, $toStatus) {
         $this->db->where('id', $studentId);
         if (!$this->db->update('students', array(
-                    'account_status' => $toStatus
+                    'account_status' => $toStatus,
+                    'approved_at' => time(),
+            
                 ))) {
             log_message('error', print_r($this->db->error(), true));
             show_error(lang('database_error'));
@@ -342,7 +352,7 @@ class Admin_model extends CI_Model {
     }
     
         public function getrequest($id) {
-        $this->db->select('requests.id, requests.sid, requests.subject, requests.message, requests.timestamp, requests_responses.original_file, requests_responses.id as respid, requests_responses.response, requests_responses.file, requests_responses.timestamp as timestampresponse, users.name as adminname, students.name, students.fathers_initial, students.lname, students.faculty, students.year');
+        $this->db->select('requests.id, requests.sid, requests.subject, requests.message, requests.timestamp, requests_responses.original_file, requests_responses.id as respid, requests_responses.response, requests_responses.file, requests_responses.timestamp as timestampresponse, requests_responses.slug, users.name as adminname, students.name, students.fathers_initial, students.lname, students.faculty, students.year');
         $this->db->join('requests_responses', 'requests.id=requests_responses.rid', 'left');
         $this->db->join('users', 'requests_responses.aid=users.id', 'left');
         $this->db->join('students', 'requests.sid=students.id', 'inner');
@@ -361,5 +371,88 @@ class Admin_model extends CI_Model {
                 return 'Success';
             }
     }
+    
+    public function totalstudents(){
+        $this->db->select('*');
+        $result = $this->db->get('students');
+        $ress = $result->num_rows();
+        return $ress;
+    }
+    
+   public function newrequests() {
+       $this->db->select('COUNT(requests.id) as totalrequests');
+        $this->db->join('requests_responses', 'requests.id=requests_responses.rid', 'left');
+        $this->db->where('requests_responses.id IS NULL');
+        $result = $this->db->get('requests');
+        $ress = $result->row();
+        return $ress->totalrequests;
+   }
+   
+      public function getnewrequests() {
+        $this->db->select('requests.id, requests.sid, requests.subject, requests.message, requests.timestamp, requests_responses.id as responseid, students.name, students.fathers_initial, students.lname, students.faculty, students.year');
+        $this->db->join('requests_responses', 'requests.id=requests_responses.rid', 'left');
+        $this->db->join('students', 'requests.sid=students.id', 'inner');
+        $this->db->where('requests_responses.id IS NULL');
+        $this->db->group_by("requests.id");
+        $result = $this->db->get('requests');
+        $ress = $result->result_array();
+        return $ress;
+    }
+    
+    public function getnewstudents() {
+        $this->db->select('id,name,fathers_initial,lname,faculty,year,email,account_status, created_at');
+        $this->db->where('approved_at', '');
+        $result = $this->db->get('students');
+        $ress = $result->result_array();
+        return $ress;
+    }
+    
+   public function spenttime($startTime, $endTime) {
+        $this->db->select('SUM(sessions.duration) as total, students.name, students.fathers_initial, students.lname');
+        $this->db->join('students', 'students.id=sessions.sid', 'inner');
+        $this->db->where('sessions.logintime >=', $startTime);
+        $this->db->where('sessions.logintime <=', $endTime);
+        $result = $this->db->get('sessions');
+        $ress = $result->result_array();
+        return $ress;
+    }
+     
+    public function topdownloads($startTime, $endTime) {
+        $this->db->select('publications.name, COUNT(publications.id) as total');
+        $this->db->join('publications', 'dwd_logs.pubid=publications.id', 'inner');
+        $this->db->where('dwd_logs.timestamp >=', $startTime);
+        $this->db->where('dwd_logs.timestamp <=', $endTime);
+        $this->db->group_by("publications.id");
+        $result = $this->db->get('dwd_logs');
+        $ress = $result->result_array();
+        return $ress;
+    }
+    
+     public function topviews($startTime, $endTime) {
+        $this->db->select('publications.name, COUNT(publications.id) as total');
+        $this->db->join('publications', 'pub_logs.pubid=publications.id', 'inner');
+        $this->db->where('pub_logs.timestamp >=', $startTime);
+        $this->db->where('pub_logs.timestamp <=', $endTime);
+        $this->db->group_by("publications.id");
+        $result = $this->db->get('pub_logs');
+        $ress = $result->result_array();
+        return $ress;
+    }
+    
+    
+    
+    public function topfavorites($startTime, $endTime) {
+        $this->db->select('publications.name, COUNT(publications.id) as total');
+        $this->db->join('publications', 'fav_logs.pubid=publications.id', 'inner');
+        $this->db->where('fav_logs.timestamp >=', $startTime);
+        $this->db->where('fav_logs.timestamp <=', $endTime);
+        $this->db->group_by("publications.id");
+        $result = $this->db->get('fav_logs');
+        $ress = $result->result_array();
+        return $ress;
+    }
+    
+    
+    
 
 }

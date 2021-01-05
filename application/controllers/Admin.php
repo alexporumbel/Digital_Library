@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->helper('string');
+        $this->load->library('SendMail');
         $this->load->model('Admin_model');
     }
 
@@ -67,8 +68,14 @@ class Admin extends CI_Controller {
         $this->login_check();
         $header = array();
         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
+        $data['newrequests'] = $this->Admin_model->newrequests();
+        $data['totalstudents'] = $this->Admin_model->totalstudents();
+        $data['unconfirmedstudents'] = $this->Admin_model->getunconfirmedcount();
+        $data['requests'] = $this->Admin_model->getnewrequests();
+        $data['students'] = $this->Admin_model->getnewstudents();
         $this->load->view('admin/header', $header);
-        $this->load->view('admin/home');
+        $this->load->view('admin/home', $data); 
         $this->load->view('admin/footer');
     }
 
@@ -121,7 +128,8 @@ class Admin extends CI_Controller {
                 }
                 redirect('admin/management-studenti');
             } else {
-                $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                 $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                 $data['formerror'] = 'Nu ai completat toate campurile obligatorii!';
                 $this->load->view('admin/header', $header);
                 if ($id === NULL) {
@@ -134,7 +142,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/footer');
             }
         } else {
-            $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             if ($id === NULL) {
                 $this->load->view('admin/managestudent');
@@ -151,7 +160,8 @@ class Admin extends CI_Controller {
         $this->login_check();
         $data = array();
         $data['students'] = $this->Admin_model->getstudents();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/managestudents', $data);
         $this->load->view('admin/footer');
@@ -160,7 +170,8 @@ class Admin extends CI_Controller {
     public function managedisciplines() {
         $this->login_check();
         $data = array();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $data['disciplines'] = $this->Admin_model->getdisciplines();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/managedisciplines', $data);
@@ -182,7 +193,8 @@ class Admin extends CI_Controller {
                 }
                 redirect('admin/management-discipline');
             } else {
-                $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                 $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                 $data['formerror'] = 'Nu ai completat toate campurile obligatorii!';
                 $this->load->view('admin/header', $header);
                 if ($id === NULL) {
@@ -195,7 +207,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/footer');
             }
         } else {
-            $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             if ($id === NULL) {
                 $this->load->view('admin/managediscipline');
@@ -211,7 +224,8 @@ class Admin extends CI_Controller {
     public function managecategories() {
         $this->login_check();
         $data = array();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $data['categories'] = $this->Admin_model->getcategories();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/managecategories', $data);
@@ -233,7 +247,8 @@ class Admin extends CI_Controller {
                 }
                 redirect('admin/management-categorii');
             } else {
-                $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                 $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                 $data['formerror'] = 'Nu ai completat toate campurile obligatorii!';
                 $this->load->view('admin/header', $header);
                 if ($id === NULL) {
@@ -246,7 +261,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/footer');
             }
         } else {
-            $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             if ($id === NULL) {
                 $this->load->view('admin/managecategory');
@@ -263,7 +279,8 @@ class Admin extends CI_Controller {
         $this->login_check();
         $data = array();
         $data['students'] = $this->Admin_model->getunconfirmedstudents();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/unconfirmedstudents', $data);
         $this->load->view('admin/footer');
@@ -292,7 +309,8 @@ class Admin extends CI_Controller {
             redirect('admin/setari-generale');
         }
         $data['value'] = $this->Admin_model->getSettingsValues();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/general-settings', $data);
         $this->load->view('admin/footer');
@@ -302,7 +320,8 @@ class Admin extends CI_Controller {
         $this->login_check();
         $data = array();
         $data['accounts'] = $this->Admin_model->getstaffaccs();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/manageaccounts', $data);
         $this->load->view('admin/footer');
@@ -312,7 +331,8 @@ class Admin extends CI_Controller {
         $this->login_check();
         $data = array();
         $data['requests'] = $this->Admin_model->getrequests();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/managerequests', $data);
         $this->load->view('admin/footer');
@@ -343,10 +363,12 @@ class Admin extends CI_Controller {
                         'timestamp' => time()
                     );
                     $resp = $this->Admin_model->managerequest($dbdata);
+                    $this->sendmail->request_response($id);
                     redirect('admin/solicitari-publicatii');
                 } else {
                     $error = array('error' => $this->upload->display_errors());
-                    $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                     $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                     $this->load->view('admin/header', $header);
                     $data['formerror'] = 'Pentru a trimite un raspuns solicitarii este necesar sa completezi un mesaj sau sa incarci un fisier';
                     $data['request'] = $this->Admin_model->getrequest($id);
@@ -364,12 +386,14 @@ class Admin extends CI_Controller {
                     'timestamp' => time()
                 );
                 $resp = $this->Admin_model->managerequest($dbdata);
+                $this->sendmail->request_response($id);
                 redirect('admin/solicitari-publicatii');
             }
         } else {
             $data = array();
             $data['request'] = $this->Admin_model->getrequest($id);
             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             $this->load->view('admin/managerequest', $data);
             $this->load->view('admin/footer');
@@ -406,7 +430,8 @@ class Admin extends CI_Controller {
                 }
                 redirect('admin/management-staff');
             } else {
-                $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                 $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                 $data['formerror'] = 'Nu ai completat toate campurile obligatorii!';
                 $this->load->view('admin/header', $header);
                 if ($id === NULL) {
@@ -419,7 +444,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/footer');
             }
         } else {
-            $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             if ($id === NULL) {
                 $this->load->view('admin/managestaff');
@@ -435,7 +461,8 @@ class Admin extends CI_Controller {
     public function managepublications() {
         $this->login_check();
         $data = array();
-        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
         $data['publications'] = $this->Admin_model->getpublications();
         $this->load->view('admin/header', $header);
         $this->load->view('admin/managepublications', $data);
@@ -466,7 +493,8 @@ class Admin extends CI_Controller {
                     if (!$this->upload->do_upload('userfile')) {
                         $error = array('error' => $this->upload->display_errors());
 
-                        $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                         $this->load->view('admin/header', $header);
                         $data['categories'] = $this->Admin_model->getcategories();
                         $data['disciplines'] = $this->Admin_model->getdisciplines();
@@ -504,7 +532,8 @@ class Admin extends CI_Controller {
                 }
             } else {
 
-                $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+                 $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
                 $this->load->view('admin/header', $header);
                 if ($id === NULL) {
                     $data['categories'] = $this->Admin_model->getcategories();
@@ -524,7 +553,8 @@ class Admin extends CI_Controller {
                 $this->load->view('admin/footer');
             }
         } else {
-            $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+             $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
             $this->load->view('admin/header', $header);
             if ($id === NULL) {
                 $data['categories'] = $this->Admin_model->getcategories();
@@ -547,5 +577,49 @@ class Admin extends CI_Controller {
         $this->Admin_model->deletepublication($id);
         redirect('admin/management-publicatii');
     }
-
+    
+    public function statistics($startTime = NULL, $endTime = NULL){
+        $this->login_check();
+        $data = array();
+        if(($startTime == NULL) && ($endTime == NULL)){
+            $startTime = strtotime("-6 days", strtotime("today", time()));
+            $endTime = time();
+        }
+        $data['newrequests'] = $this->Admin_model->newrequests();
+        $data['totalstudents'] = $this->Admin_model->totalstudents();
+        $data['unconfirmedstudents'] = $this->Admin_model->getunconfirmedcount();
+        
+        $data['favorites'] = $this->Admin_model->topfavorites($startTime, $endTime);
+        $data['topviews'] = $this->Admin_model->topviews($startTime, $endTime);
+        $data['topdownloads'] = $this->Admin_model->topdownloads($startTime, $endTime);
+        $data['spenttime'] = $this->Admin_model->spenttime($startTime, $endTime);
+         $header['unconfirmedcount'] = $this->Admin_model->getunconfirmedcount();
+        $header['newrequests'] = $this->Admin_model->newrequests();
+        $this->load->view('admin/header', $header);
+        $this->load->view('admin/stats', $data);
+        $this->load->view('admin/footer'); 
+    }
+    
+  
+  
+  public function exportcsv(){ 
+		// file name 
+		$filename = 'export.csv'; 
+		header("Content-Description: File Transfer"); 
+		header("Content-Disposition: attachment; filename=$filename"); 
+		header("Content-Type: application/csv; ");
+	   // get data 
+                 $startTime = strtotime("-6 days", strtotime("today", time()));
+            $endTime = time();
+		$usersData = $this->Admin_model->topdownloads($startTime, $endTime);
+		// file creation 
+		$file = fopen('php://output','w');
+		$header = array("Publicatie, Total favorite"); 
+		fputcsv($file, $header);
+		foreach ($usersData as $key=>$line){ 
+			fputcsv($file,$line); 
+		}
+		fclose($file); 
+		exit; 
+	}
 }
