@@ -21,8 +21,13 @@
                                         </h6>
                                         <div class="card-text">
                                            <a href="<?= $publication['slug'] .'_pub'. $publication['id']; ?>"><img src="<?= base_url('/assets/student/images/pdf.png'); ?>" class="center-pdf-img" /></a>
+                                           <?php if($publication['fav'] > 0) { ?>
                                            <span class="card-list" style="margin-top:10px; margin-bottom:10px;"><center><b><a class="addtofav" data-id="<?=$publication['id'];?>" href="#"><i class="fas fa-heart"></i> Adauga la favorite</a></b></center>
                                             </span>  
+                                           <?php }else{ ?>
+                                           <span class="card-list" style="margin-top:10px; margin-bottom:10px;"><center><b><a class="unfav" data-id="<?=$publication['id'];?>" href="#"><i class="far fa-heart"></i> Sterge de la favorite</a></b></center>
+                                            </span>  
+                                           <?php } ?>
                                            <span class="card-list"><b>Discipina:</b><a href="<?=base_url();?>disciplina/<?= $publication['discslug']; ?>"><?= $publication['discipline']; ?></a></span>
                                             <span class="card-list"><b>Categoria:</b><a href="<?=base_url();?>categorie/<?= $publication['catslug']; ?>"><?= $publication['category']; ?></a></span>
                                             <?php if ($publication['year']) { echo'<span class="card-list"><b>An:</b> <a href="' . base_url() .'an/' . $publication['year'] .'">Anul '. $publication['year'] .'</a></span>'; }?> 

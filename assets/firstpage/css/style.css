@@ -36,8 +36,20 @@ background-color: rgba(0,0,0,0.5) !important;
     color: #fff;
     display: none;
 }
-
+ 
 .forgot-msg{
+    font-weight: 500;
+    color: #fff;
+    display: none;
+}
+
+.rst-message{
+    font-weight: 500;
+    color: #fff;
+    display: none;
+}
+
+.rst-error{
     font-weight: 500;
     color: #fff;
     display: none;

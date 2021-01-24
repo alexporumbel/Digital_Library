@@ -29,9 +29,9 @@ class SendMail {
         $this->sendTo($this->CI->Admin_model->getstudentemail($id), $subject, $message);
     }
     
-    public function forget($email) {
+    public function forget($email, $token) {  
         $subject = "Resetare parola";
-        $message = "Ai solicitat schimbarea parolei pe platforma " . $this->CI->Admin_model->getSettingsValues('library_name') ." .<br><br> Acceseaza linkul urmator si introdu noua ta parola ". base_url() ."reset=$token";
+        $message = "Ai solicitat schimbarea parolei pe platforma " . $this->CI->Admin_model->getSettingsValues('library_name') ." .<br><br> Acceseaza linkul urmator si introdu noua ta parola ". base_url() ."?reset=$token";
         $this->sendTo($email, $subject, $message);
     }
     

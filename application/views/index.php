@@ -34,6 +34,8 @@
                             <span class="error-message"><center><font color="red"><b>Datele de logare nu sunt valide</b></font></center></span>
                             <div class="register-msg"><span>Contul tau a fost inregistrat si asteapta aprobarea unui administrator. Vei primi un email cand contul va fi aprobat!</span></div>	
                             <div class="forgot-msg"><span>Ti-am trimis un email cu instructiuni pentru resetarea parolei!</span></div>	
+                            <div class="rst-message"><span>Parola ta a fost resetata, acum te poti loga!</span></div>	
+                            <div class="rst-error"><span><center><font color="red"><b>Parolele introduse sunt diferite!</b></font></center></span></div>	
                             <form class="login" action="" method="post">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
@@ -72,19 +74,22 @@
 				</form>
                             
                             <form class="change-password">
+                                <label style="color: #fff;">Introdu noua parola</label>
 					<div class="input-group form-group">
+                                            
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="passf" class="form-control">
+						<input type="password" name="passf"  class="form-control">
 						
 					</div>
+                                <label style="color: #fff;">Confirma noua parola</label>
                                 <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="passl" class="form-control">
-						
+						<input type="password" name="passl"  class="form-control">
+						 
 					</div>
 					<div class="form-group">
                                             <button class="btn float-right changepass-btn">Schimba parola</button>

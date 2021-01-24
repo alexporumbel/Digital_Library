@@ -87,13 +87,13 @@
                    
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group"> 
                 <label for="inputName">Autor publicatie</label>
                 <input name="author" type="text" id="author" value="<?= @$pubdata ? $pubdata['author'] : '';?>" class="form-control">
               </div>
                <div class="form-group">
                 <label for="inputName">Loc de publicare</label>
-                <input name="pubplace" type="text" id="pubplace" value="<?= @$pubdata ? $pubdata['pub_place'] : '';?>" class="form-control">
+                <input name="pubplace" type="text" id="pubplace" value="<?= @$pubdata ? $pubdata['pubplace'] : '';?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputName">Editura</label>
@@ -101,7 +101,7 @@
               </div>
               <div class="form-group">
                 <label for="inputName">An publicatie</label>
-                <input name="pubyear" type="text" id="pubyear" value="<?= @$pubdata ? $pubdata['pub_year'] : '';?>" class="form-control">
+                <input name="pubyear" type="text" id="pubyear" value="<?= @$pubdata ? $pubdata['pubyear'] : '';?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputName">Cota</label>

@@ -143,7 +143,7 @@
                          <?php foreach ($students as $student) { ?>
                       <li>
                         <img src="<?= base_url('assets/admin/dist/img/avatar5.png'); ?>" style="max-width: 50%;" alt="User Image">
-                        <a class="users-list-name" href="#"><?=$student['name'] .' '. $student['fathers_initial'] .'. ' . $student['lname'];?></a>
+                        <a class="users-list-name" href="<?= base_url('admin/studenti-neconfirmati'); ?>"><?=$student['name'] .' '. $student['fathers_initial'] .'. ' . $student['lname'];?></a>
                         <span class="users-list-date"><?=date('d-m-Y h:i', $student['created_at']);?></span>
                       </li>
                          <?php } ?>

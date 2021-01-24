@@ -23,7 +23,7 @@ date_default_timezone_set('Europe/Bucharest');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.1.102/Digital_Library/';
+$config['base_url'] = 'http://cssm.ro/Digital_Library/';
 
 /*
 |--------------------------------------------------------------------------

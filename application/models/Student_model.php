@@ -40,7 +40,7 @@ class Student_model extends CI_Model
     }
     
     public function changePassword($token, $password) {
-        $this->db->where('token', $token);
+        $this->db->where('remember_token', $token);
         $this->db->update('students', array('password' => md5($password), 'remember_token' => ''));
     }
     
@@ -77,6 +77,14 @@ class Student_model extends CI_Model
         $this->db->group_by("year");
         $qry = $this->db->get('publications');
         return $qry->result_array();
+    }
+    
+    public function checkfav($pubid, $sid){
+        $this->db->select("pubid");
+         $this->db->where('pubid', $pubid);
+         $this->db->where('sid', $sid);
+        $qry = $this->db->get('pub_logs');
+        return $qry->num_rows();
     }
     
     public function getlastpublications($page) {
@@ -271,6 +279,14 @@ class Student_model extends CI_Model
         return $qry->row_array();
     }
     
+     public function getreqpublication($slug) {
+    $this->db->select("requests.subject, requests.timestamp, requests_responses.response, requests_responses.file");
+        $this->db->join('requests', 'requests_responses.rid = requests.id', 'inner');
+         $this->db->where('requests_responses.slug', $slug);
+        $qry = $this->db->get('requests_responses');
+        return $qry->row_array();
+    }
+    
     public function addtofav($pubid, $sid){
          $this->db->where('pubid', $pubid);
          $this->db->where('sid', $sid);
@@ -321,6 +337,24 @@ class Student_model extends CI_Model
         }
         foreach ($s as $slg) {
             $this->db->or_like('subjects.slug', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.author', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.pubplace', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.publisher', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.pubyear', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.cota', $slg);
+        }
+        foreach ($s as $slg) {
+            $this->db->or_like('publications.domain', $slg);
         }
         $this->db->group_by("publications.id");
         $qry = $this->db->get('publications', $numrows, $page);

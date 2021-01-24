@@ -175,7 +175,7 @@
                 <tfoot>
                 <tr>
                   <th>Publicatie</th>
-                  <th>Total vizualizari</th>
+                  <th>Total favorite</th>
                 </tr>
                 </tfoot>
               </table>
@@ -226,7 +226,7 @@
                 <tfoot>
                 <tr>
                   <th>Publicatie</th>
-                  <th>Total vizualizari</th>
+                  <th>Total descarcari</th>
                 </tr>
                 </tfoot>
               </table>
@@ -277,7 +277,7 @@
                 <tfoot>
                 <tr>
                   <th>Student</th>
-                  <th>Total vizualizari</th>
+                  <th>Total petrecut</th>
                 </tr>
                 </tfoot>
               </table>
