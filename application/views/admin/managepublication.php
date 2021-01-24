@@ -87,6 +87,30 @@
                    
                 </select>
               </div>
+              <div class="form-group">
+                <label for="inputName">Autor publicatie</label>
+                <input name="author" type="text" id="author" value="<?= @$pubdata ? $pubdata['author'] : '';?>" class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="inputName">Loc de publicare</label>
+                <input name="pubplace" type="text" id="pubplace" value="<?= @$pubdata ? $pubdata['pub_place'] : '';?>" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Editura</label>
+                <input name="publisher" type="text" id="publisher" value="<?= @$pubdata ? $pubdata['publisher'] : '';?>" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName">An publicatie</label>
+                <input name="pubyear" type="text" id="pubyear" value="<?= @$pubdata ? $pubdata['pub_year'] : '';?>" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Cota</label>
+                <input name="cota" type="text" id="cota" value="<?= @$pubdata ? $pubdata['cota'] : '';?>" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputName">Domeniu</label>
+                <input name="domain" type="text" id="domain" value="<?= @$pubdata ? $pubdata['domain'] : '';?>" class="form-control">
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
